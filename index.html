@@ -4,62 +4,178 @@
     <meta http-equiv="X-Frame-Options" />
     <meta name="viewport" content="width=device-width ,initial-scale=1.0">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script src="https://kit.fontawesome.com/cdf63c299f.js"></script>
     <link rel="icon" type="image/gif" href="editor.png">
     <meta charset="UTF-8">
 
-<title>Test</title>
+    <title>HCJS-Live-Editor</title>
 
-<style type="text/css">
-    
-    html,body{margin: 0;padding: 0;height: 100%;widows: 100%;overflow:-moz-hidden-unscrollable; background-color: #000000;}
-    
-    #editor{
-        position: absolute; ;
-        height: 95%;
-        width:53%;
-        display: inline-block;
-        padding: 5px;
-        margin: 10px;
-    }
-    #viewer{
-        position: relative;
-        height: 95%;
-        width: 45%;
-        display: inline-block;
-        margin: 10px;
-        background-color: #ffffff;
+    <style type="text/css">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            widows: 100%;
+            overflow: -moz-hidden-unscrollable;
+            background-color: #000000;
 
-    }
-    #container{
-        height: 100%;
-        width: auto;
-        white-space: nowrap;
-        overflow: hidden;
-        background-color: #000000;
-        font-size: 10px;
-    }
-    #MyClockDisplay{
-        
-        background-color: #ffffff;
-        font-size: 20px;
-        text-align: right;
-        color: #ffffff;
-        background-color: #000000
-        
-    }
-    #MydateDisplay{
-        
-        background-color: #ffffff;
-        font-size: 20px;
-        text-align: right;
-        color: #ffffff;
-        background-color: #000000
-        
-    }
-    #openFile{
-        background-color: #ffffff;
-    }
-    #popUpMain{
+
+        }
+
+        /** Title Text CSS (h2 tag used) @Aakash **/
+        .titletxt {
+            color: darkkhaki;
+            width: 100%;
+            line-height: 20px;
+            margin-left: 40%;
+            font-family: cursive;
+            font-size: 20px;
+            font-style: italic;
+        }
+
+        /** Date and Time CSS to place them at two end of the page @Aakash **/
+        #dt {
+            width: 100%;
+            height: 40px;
+        }
+
+        .dtc {
+
+            padding: 10px;
+            margin-top: -30px;
+            float: right;
+        }
+
+        .dtd {
+
+            padding: 0 10px;
+            margin-top: -30px;
+            float: left;
+        }
+
+        /** CSS of the buttons on the page @Aakash **/
+        .middle {
+            position: absolute;
+            top: 14%;
+            transform: translateY(-15%);
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn {
+            outline: transparent;
+            display: inline-block;
+            width: 90px;
+            height: 60px;
+            background: #f1f1f1;
+            margin: 10px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px -5px #00000070;
+            color: #3498db;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .btn i {
+            line-height: 50px;
+            font-size: 27px;
+            transition: 0.2s linear;
+        }
+
+        .btn:hover i {
+            transform: scale(1.3);
+            color: #f1f1f1;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            background: #3498db;
+            transform: rotate(0deg);
+            left: -130%;
+            top: 90%;
+        }
+
+        .btn:hover::before {
+            animation: aaa 0.7s 1;
+            top: -10%;
+            left: -10%;
+        }
+
+        @keyframes aaa {
+            0% {
+                left: -110%;
+                top: 90%;
+            }
+
+            50% {
+                left: 25%;
+                top: -45%;
+            }
+
+            100% {
+                top: -10%;
+                left: -10%;
+            }
+        }
+
+        #editor {
+            position: absolute;
+            height: 94%;
+            width: 52%;
+            display: inline-block;
+            padding: 5px;
+            margin: 10px;
+            padding-right: 10px;
+        }
+
+        #viewer {
+            position: relative;
+            height: 95%;
+            width: 45%;
+            display: inline-block;
+            margin: 10px;
+            background-color: #ffffff;
+            color: #3498db;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #container {
+            height: 100%;
+            width: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            background-color: #000000;
+            font-size: 10px;
+        }
+
+        #MyClockDisplay {
+
+            background-color: #ffffff;
+            font-size: 20px;
+            text-align: right;
+            color: #ffffff;
+            background-color: #000000
+        }
+
+        #MydateDisplay {
+
+            background-color: #ffffff;
+            font-size: 20px;
+            text-align: right;
+            color: #ffffff;
+            background-color: #000000
+        }
+
+        #openFile {
+            background-color: #161515;
+        }
+
+        #popUpMain{
        position: fixed;
        width:100%;
        height:100%;
@@ -68,7 +184,7 @@
     }
     #Popup{
         width:1200px;
-        height: 650px;
+        height: 670px;
         background-image: linear-gradient(rgba(0, 0, 0, 0.637),rgba(0, 0, 0, 0.658)),url('demo.gif');
         background-size: cover;
         position: absolute;
@@ -78,323 +194,441 @@
         box-shadow: 3px 2px 5px 3px #ffffff;
         text-align: center;
     }
+
     #newsHeading{
         transform: translateY(15px);
         margin-top: 8px;
         margin-bottom: 20px;
-        color: #ffffff;
+        color: #fdcb6e;
     }
-    #frames{
-        transform: translateY(20px);
-        width: 1150px;
-        height: 500px;
-        overflow-y: scroll;
-        color: #ffffff;
 
-    }
-    #button{
-        transform: translateY(20px);
-        background-color: #0fc0fa;
-        border: none;
-        font-size: 1rem;
-        padding: 0.6rem 1rem;
-        color: white;
-    
+        #frames {
+            transform: translateY(20px);
+            width: 1150px;
+            height: 500px;
+            overflow-y: scroll;
+            color: #ffffff;
 
-    }
-    #intro{
+        }
+
+        #popUpMain1 {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 19, 19, 0.877);
+            z-index: 1001;
+        }
+
+        #Popup1 {
+            width: 1200px;
+            height: 680px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.637), rgba(0, 0, 0, 0.658)), url('demo.gif');
+            background-size: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 3px 2px 5px 3px #ffffff;
+            text-align: center;
+        }
+
+        #newsHeading1 {
+            transform: translateY(15px);
+            margin-top: 8px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        #frames1 {
+            transform: translateY(20px);
+            width: 1250px;
+            height: 500px;
+            color: #ffffff;
+
+        }
+        #read{
+            width: 1000px;
+            height: 380px; 
+            overflow:scroll;
+        }
+        #openFile{
+            transform: translateY("30000px");
+        }
+        #button {
+            transform: translateY(35px);
+            background-color: #0fc0fa;
+            border: none;
+            font-size: 1rem;
+            padding: 0.6rem 1rem;
+            color: white;
+
+
+        }
+
+        #button1 {
+            transform: translateY(0.001px);
+            background-color: #0fc0fa;
+            border: none;
+            font-size: 1rem;
+            padding: 0.6rem 1rem;
+            color: white;
+
+
+        }
+
+        #intro{
         font-family: 'Times New Roman';
         font-size: 30px;
+        color: #ffeaa7;
+       padding: 10px;
+       
+        
     }
-ol li{
-    font-family: 'Times New Roman';
-    font-size: 30px;
-    color: aqua;
-    list-style-type: none;
+
+        #intro1 {
+            font-family: 'Times New Roman';
+            font-size: 30px;
+            transform: translateY("30px");
+        }
+        #intro2 {
+            font-family: 'Times New Roman';
+            font-size: 30px;
+        }
+        ol li {
+            font-family: 'Times New Roman';
+            font-size: 30px;
+            color: aqua;
+            list-style-type: none;
+        }
+        ::-webkit-scrollbar {
+  width: 10px;
+  
 }
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
 
-	
-</style>
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 
-</head> 
+    </style>
+
+</head>
+
 <body onload='ready()'>
-    
-        
-      <div id="popUpMain" style="display: none;">
-          <div id="Popup">
-              <h1 id="newsHeading"> INTRODUCTION  </h1><br>
-              <div id="frames">
-                  <p id="intro">
+
+
+    <div id="popUpMain" style="display: none;">
+        <div id="Popup">
+            <h1 id="newsHeading"> INTRODUCTION </h1><br>
+            <div id="frames">
+                <p id="intro">
                     HCJS-Live Editor will be using HTML, CSS, And JavaScript with the help of Ace Editor.<br>
 
-                    The Ace Editor Proporid the feature of Text Area writes a code. Using HTML and CSS will be Design the User Interface (UI).<br>
-                     Using JavaScript, we will be interacting with UI In the HCJS-Live Editor, you can create a live web page that shows output together with the code that produced it. Add formatted text, equations, images, and hyperlinks to enhance your narrative. <br>
-                     In HCJS-Live Editor shows the error if is any error while writing code. <br>
-                     This Editor is based on The World Wide Web Consortium (W3C) Standard.<br>
-W3C standards define an Open Web Platform for application development that has the unprecedented potential to enable developers to build rich interactive experiences, powered by vast data stores, that are available on any device. Although the boundaries of the platform continue to evolve, industry leaders speak nearly in unison about how HTML5 will be the cornerstone for this platform.<br>
- But the full strength of the platform relies on many more technologies that W3C and its partners are creating, including CSS, SVG, WOFF, the Semantic Web stack, XML, and a variety of APIs
-Web Design and Applications involve the standards for building and Rendering Web pages, including HTML, CSS, SVG, Ajax, and other technologies for Web Applications (“WebApps”).<br>
-<h1>This work on only HTML, CSS, And JAVASCRIPT</h1>
+                    Description of the System:
+This project is a live webpage editor in which the user can write input of the code and see its output simultaneously. HCJS-Live Editor will be using HTML, CSS, and JavaScript with the help of Ace Editor.  It is simple to understand and user friendly.<br><br>
+		The most discouraging situation for a programmer is when he is typing a code and has to check its output each and every time by compiling and running it. Every time he makes a change in his code he has to again run it and look at the output. This can be very tedious and time-consuming. Even more when the client writes an entire code only to find it not working. <br><br>
+		HCJS-Live Editor completely relieves the programmer from this task. It provides two areas to the client, one for coding and the other for displaying its output. While writing, client sees the output generated by his code at the same time. He does not need to wait for the program to run or compile. There is no button that he needs to press. The client will only write his code and the editor will do the rest.<br><br>
+The user can add formatted text, equations, images, and hyperlinks to enhance the narrative. The HCJS-Live Editor also shows the error if there is any, while writing code. Various form methods like pop-up text, labels, etc. are used to further guide the user.<br><br>
+The Editor will detect each line of code and will compile it at the same time.  Each line of code is run and the output of the same is displayed in the output area. As for html statements, the outputs will not be displayed if there were any logical errors in the code. But the editor detects and notifies the user if there are any syntactical errors. <br><br>
 
-<h1>FEATURES: -</h1><ol>
-	<li>Live Editor
-	<li>Syntax highlighting
-        <li>Automatic indent and outdent
-            <li>An optional command line
-                <li>Handles huge documents (four million lines seems to be the limit!)
-                    <li>Live syntax checker (currently JavaScript/Coffee Script/CSS/XQuery)
+                    <h1>This work on only HTML, CSS, And JAVASCRIPT</h1>
+
+                    <h1>FEATURES: -</h1>
+                    <ol>
+                        <li>Live Editor
+                        <li>Syntax highlighting
+                        <li>Automatic indent and outdent
+                        <li>An optional command line
+                        <li>Handles huge documents (four million lines seems to be the limit!)
+                        <li>Live syntax checker (currently JavaScript/Coffee Script/CSS/XQuery)
                         <li>Cut, copy, and paste functionality
-                            <li>Toggle between soft tabs and real tabs
+                        <li>Toggle between soft tabs and real tabs
 
-    </ol>
+                    </ol>
 
-                  </p>
-              </div>
-              <button class="Cancel" id="button">OK</button> 
-          </div>
-
-      </div>      
-                    
-                  <div>
-                    <label id="MyClockDisplay" class="clock"></label><br>
-                    <label id="MydateDisplay" class="date"></label>
-                </div>
-                <div>
-                   <input type="button" id="dwn-btn" value="Download file"   />
-                   <input type="file" id="openFile"/>
-                   <button id="clear">clear</button>
-                   <button id="close">Close</button> 
-                   
-            </div> 
-
-
-          
-            <div>
-                <h1></h1><br>
+                </p>
             </div>
-        <div id='container'>
-            
-       
+            <button class="Cancel" id="button">OK</button>
+        </div>
+
+    </div>
+    <div id="popUpMain1" style="display: none;">
+        <div id="Popup1">
+            <h1 id="newsHeading1"> Choose your file name</h1><br>
+            <div id="frames1">
+                    <p id="intro2">
+                            <input type="file" id="openFile">
+                    </p>
+                    <p id="intro1">
+                        <textarea id="read">
+                        </textarea>
+                   </p>
+
+            </div>
+            <button class="Cancel1" id="button1">OK</button>
+        </div>
+    </div>
+
+    <h2 class="titletxt">HCJS-Live-Editor</h2>
+
+    <div id="dt">
+        <label id="MyClockDisplay" class="clock dtc"></label><br>
+        <label id="MydateDisplay" class="date dtd"></label>
+    </div>
+    <div class="middle">
+        <button class="btn" id="dwn-btn"><i class="fas fa-file-download"></i></button>
+        <button class="btn" id="file_btn"><i class="fas fa-file-code"></i></button>
+        <button class="btn" id="clear"><i class="fas fa-broom"></i></button>
+        <button class="btn" id="close"><i class="fas fa-times-circle"></i></button>
+
+    </div>
+    <br><br><br>
+
+
+
+    <div>
+        <h1></h1><br>
+    </div>
+    <div id='container'>
+
+
         <div id="editor"></div>
-         <iframe id="viewer" align="right"   frameborder="1" sandbox="allow-same-origin allow-top-navigation allow-scripts allow-popups allow-pointer-lock allow-forms  " src="">
-         </iframe>  
-        
-            
-    </div> 
-   
-   
-   <script type="text/javascript">
+        <iframe id="viewer" align="right" frameborder="1"
+            sandbox="allow-same-origin allow-top-navigation allow-scripts allow-popups allow-pointer-lock allow-forms  "
+            src="">
+        </iframe>
 
-			
 
-            function showTime(){
-                var date = new Date();
-                var h = date.getHours(); // 0 - 23
-                var m = date.getMinutes(); // 0 - 59
-                var s = date.getSeconds(); // 0 - 59
-                var session = "AM";
-                if(h >= 12){
-                    h = h - 12;
-                    session = "PM";
-                }
-                if(h == 0){
-                    h = 12;
-                }
-                h = (h < 10) ? "0" + h : h;
-                m = (m < 10) ? "0" + m : m;
-                s = (s < 10) ? "0" + s : s;
+    </div>
 
-                
 
-                var time = h + ":" + m + ":" + s + " " + session;
-                document.getElementById("MyClockDisplay").innerText = time;
-                document.getElementById("MyClockDisplay").textContent = time;
+    <script type="text/javascript">
 
 
 
-                setTimeout(showTime, 1000);
+        function showTime() {
+            var date = new Date();
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+            var session = "AM";
+            if (h >= 12) {
+                h = h - 12;
+                session = "PM";
             }
-
-            function showDate()
-            {
-                var date = new Date();
-                var month = new Array();
-                    month[0] = "January";
-                    month[1] = "February";
-                    month[2] = "March";
-                    month[3] = "April";
-                    month[4] = "May";
-                    month[5] = "June";
-                    month[6] = "July";
-                    month[7] = "August";
-                    month[8] = "September";
-                    month[9] = "October";
-                    month[10] = "November";
-                    month[11] = "December";
-
-                   var n = month[date.getMonth()];
-                var dt = date.getDate();
-                var yr = date.getFullYear();
-                var datee = dt + "/" + n + "/" + yr ;
-                document.getElementById("MydateDisplay").innerText = datee;
-                document.getElementById("MydateDisplay").textContent = datee;
-
+            if (h == 0) {
+                h = 12;
             }
-            showDate()
-            showTime();
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
 
-            function Close(){
-                    close();
-            }
-            document.getElementById("close").addEventListener("click",Close,false);
 
-        </script> 
- 
-<script src="js/src/ace.js" type="text/javascript" charset="UTF-8">
-</script><script src="js/src/ext-language_tools.js" charset="UTF-8"></script>
-    
-<script src="js/jquery-3.4.1.js" charset="UTF-8"></script>
 
-<script type="text/javascript">
-    
-    $(document).ready(function(){
-            setTimeout(function(){
-                $('#popUpMain').css('display','block');
-                $('body').css('overflow-x',' hidden');
-                $('body').css('overflow-y','hidden');
-            },999);
-    });
-   $('#button').click(function(){
-       $('#popUpMain').css('display','none');
-       $('body').css('overflow-y',' scroll');
-   }); 
-</script>  
-<script type="text/javascript">
+            var time = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("MyClockDisplay").innerText = time;
+            document.getElementById("MyClockDisplay").textContent = time;
 
-    function update()
-    {
-        var idoc = editor.getValue();
-        document.getElementById('viewer').srcdoc = idoc
-               
-    }
-   
-    function setupEditor()
-    {
-        ace.require("ace/ext/language_tools");
-        window.frames['viewer'].location = "linux.html";
-        window.editor = ace.edit("editor");
-      editor.setTheme("ace/theme/monokai");
-      editor.getSession().setMode("ace/mode/html");
-      editor.setValue(`<!DOCTYPE html>
+
+
+            setTimeout(showTime, 1000);
+        }
+
+        function showDate() {
+            var date = new Date();
+            var month = new Array();
+            month[0] = "January";
+            month[1] = "February";
+            month[2] = "March";
+            month[3] = "April";
+            month[4] = "May";
+            month[5] = "June";
+            month[6] = "July";
+            month[7] = "August";
+            month[8] = "September";
+            month[9] = "October";
+            month[10] = "November";
+            month[11] = "December";
+
+            var n = month[date.getMonth()];
+            var dt = date.getDate();
+            var yr = date.getFullYear();
+            var datee = dt + "/" + n + "/" + yr;
+            document.getElementById("MydateDisplay").innerText = datee;
+            document.getElementById("MydateDisplay").textContent = datee;
+
+        }
+        showDate()
+        showTime();
+
+        function Close() {
+            close();
+        }
+        document.getElementById("close").addEventListener("click", Close, false);
+
+    </script>
+
+    <script src="js/src/ace.js" type="text/javascript" charset="UTF-8">
+    </script>
+    <script src="js/src/ext-language_tools.js" charset="UTF-8"></script>
+
+    <script src="js/jquery-3.4.1.js" charset="UTF-8"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#popUpMain').css('display', 'block');
+                $('body').css('overflow-x', ' hidden');
+                $('body').css('overflow-y', 'hidden');
+            }, 999);
+        });
+        $('#button').click(function () {
+            $('#popUpMain').css('display', 'none');
+            $('body').css('overflow-y', ' scroll');
+            $('.titletxt').css('font-size','40px');
+        });
+
+
+    </script>
+    <script type="text/javascript">
+
+        function update() {
+            var idoc = editor.getValue();
+            document.getElementById('viewer').srcdoc = idoc
+
+        }
+
+        function setupEditor() {
+            ace.require("ace/ext/language_tools");
+            window.frames['viewer'].location = "linux.html";
+            window.editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/html");
+            editor.setValue(`<!DOCTYPE html>
     <html>
     <head>
     </head>
     <body>
     </body>
-    </html>`,1); //1 = moves cursor to end
-      
-     editor.setOptions({enableLiveAutocompletion: true});
-    
-    editor.getSession().on("change", function(){update()});
-    editor.focus();
-    editor.setOptions({fontSize: "16pt",showLineNumbers: true,showGutter: true,vScrollBarAlwaysVisible:true});
-     editor.setShowPrintMargin(false);
-      editor.setBehavioursEnabled(true);
-      
-      
-      $(window).bind('keydown', function(event) {
-    if (event.ctrlKey || event.metaKey) {
-        switch (String.fromCharCode(event.which).toLowerCase()) {
-        case 's':
-            event.preventDefault();
-            alert('ctrl-s');
-            break;
-        case 'o':
-            event.preventDefault();
-            alert('ctrl-o');
-            break;
-       
+    </html>`, 1); //1 = moves cursor to end
+
+            editor.setOptions({ enableLiveAutocompletion: true });
+
+            editor.getSession().on("change", function () { update() });
+            editor.focus();
+            editor.setOptions({ fontSize: "16pt", showLineNumbers: true, showGutter: true, vScrollBarAlwaysVisible: true });
+            editor.setShowPrintMargin(false);
+            editor.setBehavioursEnabled(true);
+
+
+            $(window).bind('keydown', function (event) {
+                if (event.ctrlKey || event.metaKey) {
+                    switch (String.fromCharCode(event.which).toLowerCase()) {
+                        case 's':
+                            event.preventDefault();
+                            alert('ctrl-s');
+                            break;
+                        case 'o':
+                            event.preventDefault();
+                            alert('ctrl-o');
+                            break;
+
+                    }
+                }
+            });
+
         }
-    }
-});
-    
-    }
-
-
-    
-    function ready(){
-        setupEditor();
-        update();
-    }
-
-
-    function download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-
-    element.style.display = 'none';
-    document.body.appendChild(element);
-
-    element.click();
-
-    document.body.removeChild(element);
-}
 
 
 
-
-
-function download_data(){
-    var text = editor.getValue();
-    var filename = prompt("Please enter your file name:", "Defult.html");
-    if(filename=="")
-    {
-        while(filename==""){
-           var drop = confirm("Enter a File name");
-           if(drop == true)
-           {
-            var filename = prompt("Please enter your file name:", "Defult.html");
-           }
-           if(drop == false)
-           {
-                break;
-           }
+        function ready() {
+            setupEditor();
+            update();
             
+        }
+        $('#file_btn').click(function (){
+                $('#popUpMain1').css('display', 'block');
+                $('body').css('overflow-y', 'hidden');
+                document.getElementById("read").value="";
+            });
+            $('#button1').click(function () {
+                $('#popUpMain1').css('display', 'none');
+                $('body').css('overflow-y', ' scroll');
+            });
+
+        function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+
+
+
+
+
+        function download_data() {
+            var text = editor.getValue();
+            var filename = prompt("Please enter your file name:", "Defult.html");
+            if (filename == "") {
+                while (filename == "") {
+                    var drop = confirm("Enter a File name");
+                    if (drop == true) {
+                        var filename = prompt("Please enter your file name:", "Defult.html");
+                    }
+                    if (drop == false) {
+                        break;
+                    }
+
+                }
+
+            }
+            else if (filename == null) {
+                confirm("you cancel the Download function");
             }
 
-    }
-    else if(filename==null)
-    {
-        confirm("you cancel the Download function");
-    }
+            if (filename != "" && filename != null) {
+                download(filename, text);
+            }
+        }
+        // Start file download.
+        document.getElementById("dwn-btn").addEventListener("click", download_data, false);
 
-    if(filename !="" && filename !=null)
-    {
-        download(filename, text);
-    }
-}
-// Start file download.
-document.getElementById("dwn-btn").addEventListener("click", download_data, false);
-
-       document.getElementById("openFile").addEventListener('change',function(){
+        document.getElementById("openFile").addEventListener("change", function () {
             var fr = new FileReader();
-            fr.onload = function(){
+            fr.onload = function () {
                 var data = this.result;
-                editor.setValue(data); 
+                editor.setValue(data);
+                document.getElementById("read").value = data;
             }
             fr.readAsText(this.files[0]);
         })
-        
-  function clear()
-  {
-      var data2 = 0
-      editor.setValue(data2);
-  }  
 
-  document.getElementById("clear").addEventListener("click",clear,false);   
+        function clear() {
+            var data2 = 0
+            editor.setValue(0);
+        }
 
-</script>
-    </body>
-    </html>
+        document.getElementById("clear").addEventListener("click", clear, false);
+
+    </script>
+</body>
+
+</html>
