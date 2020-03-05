@@ -502,7 +502,9 @@ The Editor will detect each line of code and will compile it at the same time.  
 
     </script>
     <script type="text/javascript">
-
+	 window.onbeforeunload = function(event) {
+            event.returnValue = "Don't reload a page ";
+        };
         function update() {
             var idoc = editor.getValue();
             document.getElementById('viewer').srcdoc = idoc
