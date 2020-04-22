@@ -1,5 +1,5 @@
 # HCJS-Live-Editor
-real time Html editor
+real time inline Html Javascript and css editor
 step 1:- 
   Start Server like (xampp,mamp,etc).
 step 2:-
